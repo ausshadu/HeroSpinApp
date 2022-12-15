@@ -2,12 +2,12 @@ import { StyleSheet } from 'react-native';
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { RouteNames } from './Routes';
-import HeroOfTheDay from '../Screens/HeroOfTheDay';
 import MovieOfTheDay from '../Screens/MovieOfTheDay';
 import TVSeriesOfTheDay from '../Screens/TVSeriesOfTheDay';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import HeroStackNavigator from './HeroStackNavigator';
 
 export default function BottomTabsNavigation() {
   const Tab = createBottomTabNavigator();
@@ -15,22 +15,20 @@ export default function BottomTabsNavigation() {
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name={RouteNames.HeroOfTheDay}
+        name={RouteNames.HeroStack}
         options={{
-          headerTitle: 'Hero of the Day',
-          title: 'Heros',
+          headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <FontAwesome name="user-o" size={size} color={color} />
           ),
         }}
-        component={HeroOfTheDay}
+        component={HeroStackNavigator}
       />
 
       <Tab.Screen
         name={RouteNames.MovieOfTheDay}
         options={{
-          headerTitle: 'Movie of the Day',
-          title: 'Movies',
+          headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <Entypo name="folder-video" size={size} color={color} />
           ),
@@ -41,8 +39,7 @@ export default function BottomTabsNavigation() {
       <Tab.Screen
         name={RouteNames.TVSeriesOfTheDay}
         options={{
-          headerTitle: 'TV Series of the Day',
-          title: 'TV Series',
+          headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <MaterialIcons name="live-tv" size={size} color={color} />
           ),
