@@ -5,6 +5,9 @@ import { RouteNames } from './Routes';
 import HeroOfTheDay from '../Screens/HeroOfTheDay';
 import MovieOfTheDay from '../Screens/MovieOfTheDay';
 import TVSeriesOfTheDay from '../Screens/TVSeriesOfTheDay';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Entypo from 'react-native-vector-icons/Entypo';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function BottomTabsNavigation() {
   const Tab = createBottomTabNavigator();
@@ -16,6 +19,9 @@ export default function BottomTabsNavigation() {
         options={{
           headerTitle: 'Hero of the Day',
           title: 'Heros',
+          tabBarIcon: ({ color, size, focused }) => (
+            <FontAwesome name="user-o" size={size} color={color} />
+          ),
         }}
         component={HeroOfTheDay}
       />
@@ -25,6 +31,9 @@ export default function BottomTabsNavigation() {
         options={{
           headerTitle: 'Movie of the Day',
           title: 'Movies',
+          tabBarIcon: ({ color, size, focused }) => (
+            <Entypo name="folder-video" size={size} color={color} />
+          ),
         }}
         component={MovieOfTheDay}
       />
@@ -34,6 +43,9 @@ export default function BottomTabsNavigation() {
         options={{
           headerTitle: 'TV Series of the Day',
           title: 'TV Series',
+          tabBarIcon: ({ color, size, focused }) => (
+            <MaterialIcons name="live-tv" size={size} color={color} />
+          ),
         }}
         component={TVSeriesOfTheDay}
       />
