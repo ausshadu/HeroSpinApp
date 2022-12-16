@@ -1,6 +1,6 @@
 export const RouteNames = {
   HeroStack: 'HeroStack',
-  HeroOfTheDay: 'HeroOfTheDay',
+  HerosList: 'HerosList',
   HeroDetails: 'HeroDetails',
 
   MovieStack: 'MovieStack',
@@ -10,4 +10,7 @@ export const RouteNames = {
   TVSeriesStack: 'TVSeriesStack',
   TVSeriesOfTheDay: 'TVSeriesOfTheDay',
   TVSeriesDetails: 'TVSeriesDetails',
+
+  HistoryStack: 'HistoryStack',
+  HistoryScreen: 'HistoryScreen',
 };
