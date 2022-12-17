@@ -5,10 +5,12 @@ import FastImage from 'react-native-fast-image';
 import * as Progress from 'react-native-progress';
 import { DefaultTheme, useNavigation } from '@react-navigation/native';
 import { Button } from '@rneui/themed';
+import { RouteNames } from '../../Navigations/Routes';
 
 export default function HeroDetails(props: any) {
   const hero = props.route.params?.hero as Hero;
   const dimensions = useWindowDimensions();
+  const navigation = useNavigation();
 
   const biographyInfo = [
     { label: 'Full name', value: hero.biography.fullName },
@@ -45,8 +47,17 @@ export default function HeroDetails(props: any) {
     { label: 'Relatives', value: hero.connections.relatives },
   ];
 
-  const showRandomMovie = () => { };
-  const showAllMovies = () => { };
+  const showRandomMovie = () => {
+    navigation.navigate(RouteNames.RandomMovieScreen);
+  };
+
+  const showAllMovies = () => {
+
+  };
+
+  const markAsAlreadyWatched = () => {
+    navigation.navigate(RouteNames.HistoryStack);
+  };
 
   return (
     <ScrollView>
@@ -140,13 +151,24 @@ export default function HeroDetails(props: any) {
               color={DefaultTheme.colors.notification}
               onPress={showRandomMovie}
             />
-
             <Button
-              title="Show All"
+              title="Show all"
               size="sm"
               style={{ width: dimensions.width / 2.5 }}
               color={DefaultTheme.colors.text}
               onPress={showAllMovies}
+            />
+
+
+          </View>
+          <View style={{ paddingHorizontal: 10, flexDirection: 'row', flex: 1, justifyContent: 'center', }}>
+            <Button
+              title="Already watched"
+              size="sm"
+              style={{ width: dimensions.width / 2 }}
+              color={DefaultTheme.colors.border}
+              titleStyle={{ color: DefaultTheme.colors.text }}
+              onPress={markAsAlreadyWatched}
             />
           </View>
         </View>

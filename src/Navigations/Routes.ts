@@ -4,8 +4,9 @@ export const RouteNames = {
   HeroDetails: 'HeroDetails',
 
   SearchStack: 'SearchStack',
-  MovieOfTheDay: 'MovieOfTheDay',
+  SearchScreen: 'SearchScreen',
   SearchDetails: 'SearchDetails',
+  RandomMovieScreen: 'RandomMovieScreen',
 
   TVSeriesStack: 'TVSeriesStack',
   TVSeriesOfTheDay: 'TVSeriesOfTheDay',

@@ -6,7 +6,6 @@ import { Hero } from '../../models/hero.model';
 import { ApiCall } from '../../helpers';
 
 import Feather from 'react-native-vector-icons/Feather';
-import { MockMovies } from './movie.mock';
 import { Movie, Search, SearchError, SearchResults } from '../../models/movies.models';
 import FastImage from 'react-native-fast-image';
 import { AxiosResponse } from 'axios';
@@ -17,7 +16,7 @@ import { ButtonGroup } from '@rneui/themed';
 import { RouteNames } from '../../Navigations/Routes';
 
 
-export default function MovieOfTheDay() {
+export default function SearchScreen() {
 
   const [selectedItem, setSelectedItem] = useState<TAutocompleteDropdownItem>(null);
   const [herosList, setHerosList] = useState<TAutocompleteDropdownItem[]>([]);

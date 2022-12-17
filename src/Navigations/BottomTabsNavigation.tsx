@@ -11,6 +11,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import HeroStackNavigator from './HeroStackNavigator';
 import SearchStackNavigator from './SearchStackNavigator';
+import HistoryStack from './HistoryStack';
 
 export default function BottomTabsNavigation() {
   const Tab = createBottomTabNavigator();
@@ -44,13 +45,13 @@ export default function BottomTabsNavigation() {
       <Tab.Screen
         name={RouteNames.HistoryStack}
         options={{
-          title: 'History',
+          title: 'Watch History',
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <MaterialCommunityIcons name="history" size={size} color={color} />
           ),
         }}
-        component={TVSeriesOfTheDay}
+        component={HistoryStack}
       />
     </Tab.Navigator>
   );
