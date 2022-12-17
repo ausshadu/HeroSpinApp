@@ -29,7 +29,7 @@ export default function HeroOfTheDay(props: any) {
 
         <View>
           <Text style={{ fontSize: 16, fontWeight: 'bold', marginBottom: 10, }}>{hero.name.toUpperCase()}</Text>
-          {hero.biography.fullName && <Text style={{}}>{hero.biography.fullName}</Text>}
+          {hero.biography.fullName && <Text style={{ maxWidth: '70%' }}>{hero.biography.fullName}</Text>}
           {hero.biography.aliases.length && <Text style={{ maxWidth: '65%', color: 'grey' }}>{hero.biography.aliases.join(', ')}</Text>}
         </View>
       </View>

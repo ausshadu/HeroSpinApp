@@ -26,6 +26,7 @@ export default function BottomTabsNavigation() {
           tabBarIcon: ({ color, size, focused }) => (
             <FontAwesome name="user-o" size={size} color={color} />
           ),
+          tabBarLabelStyle: { fontSize: 12, },
         }}
         component={HeroStackNavigator}
       />
@@ -38,6 +39,7 @@ export default function BottomTabsNavigation() {
           tabBarIcon: ({ color, size, focused }) => (
             <Entypo name="folder-video" size={size} color={color} />
           ),
+          tabBarLabelStyle: { fontSize: 12, },
         }}
         component={SearchStackNavigator}
       />
@@ -50,6 +52,7 @@ export default function BottomTabsNavigation() {
           tabBarIcon: ({ color, size, focused }) => (
             <MaterialCommunityIcons name="history" size={size} color={color} />
           ),
+          tabBarLabelStyle: { fontSize: 12, },
         }}
         component={HistoryStack}
       />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, FlatList } from 'react-native';
 import HerosRawData from '../../MockData/heros.json';
 
@@ -7,15 +7,18 @@ import { randomNumberFromInterval, Sizes } from '../../helpers';
 import FastImage from 'react-native-fast-image';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
+import { DefaultTheme, useNavigation } from '@react-navigation/native';
 import { RouteNames } from '../../Navigations/Routes';
 import HeroOfTheDay from './HeroOfTheDay';
+import { SearchBar } from '@rneui/themed';
 
 
 export default function HeroList(props: any) {
   const navigation = useNavigation();
   const MAX_HEROS = (HerosRawData as Hero[]).length;
-  const randomHeroIndex = randomNumberFromInterval(0,MAX_HEROS-1);
+  const [herosList, setHerosList] = useState<Hero[]>(HerosRawData as Hero[]);
+  const [randomHeroIndex, setRandomHeroIndex] = useState(randomNumberFromInterval(0, MAX_HEROS - 1));
+  const [searchText, setSearchText] = useState('');
 
   const renderHeroCard = (hero: Hero) => {
     return (
@@ -33,7 +36,7 @@ export default function HeroList(props: any) {
         />
         <View>
           <Text style={{ fontSize: 16, fontWeight: 'bold' }}>{hero.name.toUpperCase()}</Text>
-          {hero.biography.fullName && <Text style={{}}>{hero.biography.fullName}</Text>}
+          {hero.biography.fullName && <Text style={{ maxWidth: '75%' }}>{hero.biography.fullName}</Text>}
           {hero.biography.aliases.length && <Text style={{ maxWidth: '75%', color: 'grey' }}>{hero.biography.aliases.join(', ')}</Text>}
 
           <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: Sizes.small }}>
@@ -48,12 +51,34 @@ export default function HeroList(props: any) {
     );
   };
 
+  const updateSearch = (text: string) => {
+    setSearchText(text);
+    // Search either in name or in full name
+    setHerosList(
+      HerosRawData.filter(hero => {
+        return hero.name.toLowerCase().indexOf(text.toLowerCase()) > -1
+          || hero.biography.fullName.toLowerCase().indexOf(text.toLowerCase()) > -1
+      }) as Hero[]
+    );
+  }
+
   return (
     <View style={styles.container}>
+
+      <SearchBar
+        placeholder="Search a hero"
+        onChangeText={updateSearch}
+        value={searchText}
+        containerStyle={{ backgroundColor: 'white', borderWidth: 1, padding: 0 }}
+        inputContainerStyle={{ backgroundColor: DefaultTheme.colors.background }}
+      />
+      <View style={{ marginVertical: 10 }} />
+
+      <HeroOfTheDay hero={HerosRawData[randomHeroIndex]} />
+
       <FlatList
-        data={(HerosRawData as Hero[]) || []}
+        data={herosList}
         renderItem={({ item }) => renderHeroCard(item)}
-        ListHeaderComponent={() => <HeroOfTheDay hero={HerosRawData[randomHeroIndex]} />}
         ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
       />
     </View>

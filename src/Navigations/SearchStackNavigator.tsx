@@ -23,10 +23,6 @@ export default function SearchStackNavigator() {
         component={SearchDetails}
         options={({ route }) => ({ title: route?.params?.title || '-' })}
       />
-      <Stack.Screen
-        name={RouteNames.RandomMovieScreen}
-        component={RandomMovieScreen}
-      />
     </Stack.Navigator>
   );
 }

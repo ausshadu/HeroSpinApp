@@ -1,10 +1,11 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 
+
 const instance = axios.create();
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
   config.baseURL = 'https://omdbapi.com';
   config.params = {
-    apikey: '1f4c93c7'
+    apikey: '1f4c93c7' // Store this in .env file
   };
   return config;
 });
