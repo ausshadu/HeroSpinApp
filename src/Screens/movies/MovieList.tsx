@@ -1,10 +1,10 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 
-export default function MovieOfTheDay() {
+export default function MovieList() {
   return (
     <View>
-      <Text>MovieOfTheDay</Text>
+      <Text>MovieList</Text>
     </View>
   )
 }
