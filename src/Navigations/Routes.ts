@@ -3,9 +3,9 @@ export const RouteNames = {
   HerosList: 'HerosList',
   HeroDetails: 'HeroDetails',
 
-  MovieStack: 'MovieStack',
+  SearchStack: 'SearchStack',
   MovieOfTheDay: 'MovieOfTheDay',
-  MovieDetails: 'MovieDetails',
+  SearchDetails: 'SearchDetails',
 
   TVSeriesStack: 'TVSeriesStack',
   TVSeriesOfTheDay: 'TVSeriesOfTheDay',

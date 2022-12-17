@@ -7,7 +7,7 @@ import { ApiCall } from '../../helpers';
 
 import Feather from 'react-native-vector-icons/Feather';
 import { MockMovies } from './movie.mock';
-import { Search, SearchError, SearchResults } from '../../models/movies.models';
+import { Movie, Search, SearchError, SearchResults } from '../../models/movies.models';
 import FastImage from 'react-native-fast-image';
 import { AxiosResponse } from 'axios';
 Feather.loadFont();
@@ -48,7 +48,21 @@ export default function MovieOfTheDay() {
       <TouchableOpacity
         style={{ flexDirection: 'row' }}
         onPress={() => {
-          navigation.navigate(RouteNames.MovieDetails, { title: movie.Title, movie });
+          setIsLoading(true);
+          ApiCall({ url: `?i=${movie.imdbID}&plot=full` })
+            .then((res: AxiosResponse<Movie | SearchError>) => {
+              if ('Error' in res.data) {
+                // No results found
+                console.log('No Results');
+                setMovieResults([]);
+              } else {
+                if (res.data) {
+                  navigation.navigate(RouteNames.SearchDetails, { title: movie.Title, movie: res.data });
+                }
+              }
+            })
+            .catch(err => console.log(err))
+            .finally(() => setIsLoading(false));
         }}
       >
         <FastImage
@@ -59,7 +73,16 @@ export default function MovieOfTheDay() {
         <View style={{ flex: 1 }}>
           <Text style={{ fontWeight: 'bold' }}>{movie.Title}</Text>
           <Text style={{ color: 'grey', marginTop: 10 }}>Year: {movie.Year}</Text>
-          <View style={{ height: 25, width: 100, borderRadius: 15, padding: 2, justifyContent: 'center', alignItems: 'center', marginTop: 10, backgroundColor: 'lightgrey' }}>
+          <View style={{
+            height: 25,
+            width: 100,
+            borderRadius: 15,
+            padding: 2,
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginTop: 10,
+            backgroundColor: movie.Type === 'movie' ? DefaultTheme.colors.primary : DefaultTheme.colors.notification,
+          }}>
             <Text>{movie.Type.toUpperCase()}</Text>
           </View>
         </View>
@@ -79,7 +102,7 @@ export default function MovieOfTheDay() {
           ClearIconComponent={<Feather name="x-circle" size={18} color="red" />}
           controller={(controller: AutocompleteDropdownRef) => dropdownController.current = controller}
           textInputProps={{
-            placeholder: 'Search by a movie or hero',
+            placeholder: 'Search by a movie or series',
             style: { backgroundColor: 'white' }
           }}
           rightButtonsContainerStyle={{ backgroundColor: 'white' }}
@@ -151,5 +174,5 @@ const styles = StyleSheet.create({
   itemSeparator: {
     height: 10,
   },
-  imgStyle: { width: 130, height: 130 },
+  imgStyle: { width: 130, height: 130, marginRight: 10 },
 })

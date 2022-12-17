@@ -1,11 +1,14 @@
 import React from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, useWindowDimensions } from 'react-native';
 import { Hero } from '../../models/hero.model';
 import FastImage from 'react-native-fast-image';
 import * as Progress from 'react-native-progress';
+import { DefaultTheme, useNavigation } from '@react-navigation/native';
+import { Button } from '@rneui/themed';
 
 export default function HeroDetails(props: any) {
   const hero = props.route.params?.hero as Hero;
+  const dimensions = useWindowDimensions();
 
   const biographyInfo = [
     { label: 'Full name', value: hero.biography.fullName },
@@ -39,13 +42,16 @@ export default function HeroDetails(props: any) {
 
   const connectionsInfo = [
     { label: 'Affiliations', value: hero.connections.groupAffiliation },
-    { label: 'Relatives', value: hero.connections.relatives},
+    { label: 'Relatives', value: hero.connections.relatives },
   ];
+
+  const showRandomMovie = () => { };
+  const showAllMovies = () => { };
 
   return (
     <ScrollView>
       <FastImage
-        style={{ width: 300, height: 300, justifyContent: 'center', alignSelf: 'center', paddingTop:12 }}
+        style={{ width: 300, height: 300, justifyContent: 'center', alignSelf: 'center', paddingTop: 12 }}
         source={{ uri: hero.images.lg, priority: FastImage.priority.normal }}
         resizeMode={FastImage.resizeMode.contain}
       />
@@ -54,7 +60,7 @@ export default function HeroDetails(props: any) {
 
         <View style={{ marginTop: 20 }}>
 
-          <View style={{ backgroundColor: 'black', padding: 10 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
             <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>POWERSTATS</Text>
           </View>
 
@@ -68,8 +74,9 @@ export default function HeroDetails(props: any) {
                   showsText={true}
                   formatText={_ => value + '%'}
                   size={50}
-                  progress={value}
+                  progress={value / 100}
                   textStyle={{ fontSize: 14 }}
+                  color={DefaultTheme.colors.notification}
                 />
                 <Text style={{ fontSize: 10, marginTop: 10 }}>{label}</Text>
               </View>
@@ -79,7 +86,7 @@ export default function HeroDetails(props: any) {
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <View style={{ backgroundColor: 'black', padding: 10 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
             <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>BIOGRAPHY</Text>
           </View>
 
@@ -94,7 +101,7 @@ export default function HeroDetails(props: any) {
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <View style={{ backgroundColor: 'black', padding: 10 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
             <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>APPEARANCE</Text>
           </View>
           <View style={{ paddingHorizontal: 10 }}>
@@ -108,16 +115,39 @@ export default function HeroDetails(props: any) {
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <View style={{ backgroundColor: 'black', padding: 10 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
             <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>CONNECTIONS</Text>
           </View>
           <View style={{ paddingHorizontal: 10 }}>
-          {connectionsInfo.map(({ label, value }) => (
+            {connectionsInfo.map(({ label, value }) => (
               <View style={{ flexDirection: 'row', marginVertical: 5 }} key={label}>
                 <Text style={{ width: '35%', fontWeight: 'bold' }}>{label}</Text>
                 <Text style={{ width: '65%' }}>{value}</Text>
               </View>
             ))}
+          </View>
+        </View>
+
+        <View style={{ marginTop: 20 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
+            <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>WHAT TO WATCH? 🤔</Text>
+          </View>
+          <View style={{ padding: 10, flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+            <Button
+              title="Random"
+              size="sm"
+              style={{ width: dimensions.width / 2.5 }}
+              color={DefaultTheme.colors.notification}
+              onPress={showRandomMovie}
+            />
+
+            <Button
+              title="Show All"
+              size="sm"
+              style={{ width: dimensions.width / 2.5 }}
+              color={DefaultTheme.colors.text}
+              onPress={showAllMovies}
+            />
           </View>
         </View>
       </View>

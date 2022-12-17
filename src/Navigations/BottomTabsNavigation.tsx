@@ -10,7 +10,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import HeroStackNavigator from './HeroStackNavigator';
-import MovieStackNavigator from './MovieStackNavigator';
+import SearchStackNavigator from './SearchStackNavigator';
 
 export default function BottomTabsNavigation() {
   const Tab = createBottomTabNavigator();
@@ -30,28 +30,17 @@ export default function BottomTabsNavigation() {
       />
 
       <Tab.Screen
-        name={RouteNames.MovieStack}
+        name={RouteNames.SearchStack}
         options={{
-          title: 'Movies',
+          title: 'Search',
           headerShown: false,
           tabBarIcon: ({ color, size, focused }) => (
             <Entypo name="folder-video" size={size} color={color} />
           ),
         }}
-        component={MovieStackNavigator}
+        component={SearchStackNavigator}
       />
 
-      <Tab.Screen
-        name={RouteNames.TVSeriesOfTheDay}
-        options={{
-          title: 'TV Series',
-          headerShown: false,
-          tabBarIcon: ({ color, size, focused }) => (
-            <MaterialIcons name="live-tv" size={size} color={color} />
-          ),
-        }}
-        component={TVSeriesOfTheDay}
-      />
       <Tab.Screen
         name={RouteNames.HistoryStack}
         options={{
