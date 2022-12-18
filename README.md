@@ -24,6 +24,14 @@ npm run ios
 npm run android
 ```
 
+4. Cleanup and fresh install (Optional)
+
+```shell
+rm -rf node_modules package-lock.json ios/Pods ios/Podfile.lock
+npm install --legacy-peer-deps --force
+cd ios && pod install --repo-update
+```
+
 ### Application screens hierarchy
 
 - **Root Navigation - Bottom Tabs**
