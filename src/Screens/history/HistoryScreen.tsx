@@ -1,18 +1,20 @@
-import { FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, FlatList, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { Movie } from '../../models/movies.models';
-import { ApiCall, AppConstants, getSavedItem } from '../../helpers';
+import { AppConstants, clearSavedData, getSavedItem } from '../../helpers';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
-import { useNavigation } from '@react-navigation/native';
+import { DefaultTheme, useFocusEffect, useNavigation } from '@react-navigation/native';
 import { RouteNames } from '../../Navigations/Routes';
+import { Button } from '@rneui/themed';
+import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 export default function HistoryScreen() {
 
   const [movieHistory, setMovieHistory] = useState<Movie[]>([]);
   const navigation = useNavigation();
 
-  useEffect(() => {
+  useFocusEffect(() => {
     (async () => {
       try {
         const rawHistory: string | null = await getSavedItem(AppConstants.WATCH_HISTORY)
@@ -27,7 +29,7 @@ export default function HistoryScreen() {
         console.log('Error', error);
       }
     })();
-  }, []);
+  });
 
   const renderMovieCard = (movie: Movie) => {
     return (
@@ -66,6 +68,26 @@ export default function HistoryScreen() {
         ListEmptyComponent={showEmptyList}
         ItemSeparatorComponent={() => <View style={styles.itemSeparator} />}
       />
+      {movieHistory.length ? (<View>
+        <Button
+          title="Clear History"
+          size='sm'
+          icon={<EvilIcons name='trash' size={22} color="white" style={{ marginRight: 10 }} />}
+          color={DefaultTheme.colors.notification}
+          onPress={() => {
+            Alert.alert('Warning', 'Do you want to clear watch history?', [
+              { text: 'No', onPress: () => { }, style: 'cancel' },
+              {
+                text: 'Yes', onPress: async () => {
+                  await clearSavedData();
+                  setMovieHistory([]);
+                  Alert.alert('Info', 'Watch history cleared.');
+                }, style: 'destructive'
+              },
+            ]);
+          }}
+        />
+      </View>) : null}
     </View>
   )
 }

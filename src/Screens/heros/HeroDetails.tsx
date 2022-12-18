@@ -9,6 +9,7 @@ import { RouteNames } from '../../Navigations/Routes';
 import { ApiCall, randomNumberFromInterval } from '../../helpers';
 import { AxiosResponse } from 'axios';
 import { Movie, Search, SearchError, SearchResults } from '../../models/movies.models';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default function HeroDetails(props: any) {
   const hero = props.route.params?.hero as Hero;
@@ -167,21 +168,22 @@ export default function HeroDetails(props: any) {
             <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
               <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>WHAT TO WATCH? 🤔</Text>
             </View>
-            <View style={{ padding: 10, flexDirection: 'row', flex: 1, justifyContent: 'space-between' }}>
+            <View style={{ padding: 10, flexDirection: 'row', flex: 1, justifyContent: 'center' }}>
               <Button
-                title="Random"
+                title="Random Movie"
                 size="sm"
-                style={{ width: dimensions.width / 2.5 }}
+                icon={<MaterialIcons name='movie' size={22} color="white" style={{ marginRight: 10 }} />}
+                style={{ width: dimensions.width / 2 }}
                 color={DefaultTheme.colors.notification}
                 onPress={showRandomMovie}
               />
-              <Button
+              {/* <Button
                 title="Show all"
                 size="sm"
                 style={{ width: dimensions.width / 2.5 }}
                 color={DefaultTheme.colors.text}
                 onPress={showAllMovies}
-              />
+              /> */}
             </View>
           </View>
         </View>

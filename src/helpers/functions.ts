@@ -18,10 +18,14 @@ export function randomNumberFromInterval(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
-export async function getSavedItem(key: string) {
+export async function getSavedItem(key: string): Promise<string | null> {
   return await AsyncStorage.getItem(key);
 }
 
-export async function setSavedItem(key: string, value: string) {
+export async function setSavedItem(key: string, value: string): Promise<void> {
   return await AsyncStorage.setItem(key, value);
+}
+
+export async function clearSavedData(): Promise<void> {
+  return await AsyncStorage.clear();
 }
