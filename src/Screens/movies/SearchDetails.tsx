@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native'
 import { useRoute } from '@react-navigation/native'
 import { Movie, Search } from '../../models/movies.models';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import { DefaultTheme, useNavigation } from '@react-navigation/native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 export default function SearchDetails() {
 
@@ -91,6 +92,23 @@ export default function SearchDetails() {
               <Text style={{ width: '65%', fontWeight: 'bold' }}>IMDB Votes</Text>
               <Text style={{ width: '35%' }}>{titleDetails.imdbVotes}</Text>
             </View>
+          </View>
+        </View>
+
+        <View style={{ marginTop: 20 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
+            <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>VIEW MORE</Text>
+          </View>
+          <View style={{ padding: 10 }}>
+            <TouchableOpacity onPress={async () => {
+              const IMDbUrl = `https://www.imdb.com/title/${titleDetails.imdbID}`;
+              const canOpen: boolean = await Linking.canOpenURL(IMDbUrl);
+              if (canOpen) {
+                Linking.openURL(IMDbUrl);
+              }
+            }}>
+              <FontAwesome name="imdb" size={60} />
+            </TouchableOpacity>
           </View>
         </View>
 
