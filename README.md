@@ -24,7 +24,7 @@ npm run ios
 npm run android
 ```
 
-### Application screens
+### Application screens hierarchy
 
 - **Root Navigation - Bottom Tabs**
   
@@ -39,3 +39,20 @@ npm run android
   
   3. [TAB] - **History**
         1. [SCREEN] - Watch History
+
+### Application screenshots
+|               | Screen 1 | Screen 2 | Screen 3 |
+|---------------|----------|----------|----------|
+| TAB - Hero    | <img src="./app_screens/1a.png" width="300">         | <img src="./app_screens/1b.png" width="300">         |<img src="./app_screens/1c.png" width="300">          |
+| TAB - Search  |<img src="./app_screens/2a.png" width="300">          | <img src="./app_screens/2b.png" width="300">          |    -      |
+| TAB - History |    Coming Soon      |          |          |
+
+### Summary
+
+- [HeroSpin](#herospin)
+  - [Getting Started](#getting-started)
+    - [Install dependencies](#install-dependencies)
+    - [Application screens hierarchy](#application-screens-hierarchy)
+    - [Application screenshots](#application-screenshots)
+    - [Summary](#summary)
+
