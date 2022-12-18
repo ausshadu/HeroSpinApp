@@ -43,6 +43,7 @@ export interface Movie {
   Production: string;
   Website: string;
   Response: string;
+  UpdatedOn: number;
 }
 
 export interface Rating {

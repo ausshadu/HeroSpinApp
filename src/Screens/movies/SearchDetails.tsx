@@ -1,16 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native'
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking, Alert } from 'react-native';
 import { useRoute } from '@react-navigation/native'
 import { Movie, Search } from '../../models/movies.models';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
 import { DefaultTheme, useNavigation } from '@react-navigation/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import { Button } from '@rneui/base';
+import { RouteNames } from '../../Navigations/Routes';
+import { Icon } from '@rneui/themed';
+import { AppConstants, getSavedItem, setSavedItem } from '../../helpers';
+
+
 
 export default function SearchDetails() {
 
   const route = useRoute();
   const titleDetails: Movie = route.params?.movie;
+  const fromSreen: string = route.params?.fromSreen || '';
 
   const summaryInfo = [
     { label: 'Director', value: titleDetails.Director.split(', ').join('\n') },
@@ -22,7 +30,28 @@ export default function SearchDetails() {
     { label: 'BoxOffice', value: titleDetails.BoxOffice },
     { label: 'Production', value: titleDetails.Production },
     { label: 'Website', value: titleDetails.Website },
-  ]
+  ];
+
+  const markAsWatched = async () => {
+    const rawHistory: string | null = await getSavedItem(AppConstants.WATCH_HISTORY);
+    if (typeof rawHistory === 'string' && rawHistory.length) {
+      // We have watch history
+      const allWatchedMovies: Movie[] = JSON.parse(rawHistory); // Array of movies;
+      const idx = allWatchedMovies.findIndex((movie: Movie) => movie.imdbID === titleDetails.imdbID);
+      if (idx > -1) {
+        // Existing Movie
+        allWatchedMovies[idx].UpdatedOn = new Date().getTime();
+      } else {
+        allWatchedMovies.push({ ...titleDetails, UpdatedOn: new Date().getTime() });
+      }
+      setSavedItem(AppConstants.WATCH_HISTORY, JSON.stringify(allWatchedMovies));
+    } else {
+      // We don't have a watch history, create one
+      const watchHistoryArray: Movie[] = [{ ...titleDetails, UpdatedOn: new Date().getTime() }];
+      setSavedItem(AppConstants.WATCH_HISTORY, JSON.stringify(watchHistoryArray))
+        .then(() => Alert.alert('Info', `${titleDetails.Title} marked as watched.`));
+    }
+  };
 
   return (
     <ScrollView style={{ flex: 1, padding: 12 }} contentContainerStyle={{ paddingBottom: 20 }}>
@@ -44,7 +73,7 @@ export default function SearchDetails() {
 
         <View style={{ flexDirection: 'row', marginTop: 10, }}>
           {titleDetails.Genre.split(', ').map(genre => (
-            <View style={{ height: 30, borderWidth: 1, alignItems: 'center', marginRight: 10, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 10, backgroundColor: DefaultTheme.colors.notification, borderColor: DefaultTheme.colors.notification }}>
+            <View key={genre} style={{ height: 30, borderWidth: 1, alignItems: 'center', marginRight: 10, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 10, backgroundColor: DefaultTheme.colors.notification, borderColor: DefaultTheme.colors.notification }}>
               <Text style={{ color: 'white' }}>{genre}</Text>
             </View>
           ))}
@@ -97,9 +126,9 @@ export default function SearchDetails() {
 
         <View style={{ marginTop: 20 }}>
           <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
-            <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>VIEW MORE</Text>
+            <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>MORE</Text>
           </View>
-          <View style={{ padding: 10 }}>
+          <View style={{ padding: 10, flexDirection: 'row', alignItems: 'center' }}>
             <TouchableOpacity onPress={async () => {
               const IMDbUrl = `https://www.imdb.com/title/${titleDetails.imdbID}`;
               const canOpen: boolean = await Linking.canOpenURL(IMDbUrl);
@@ -109,6 +138,16 @@ export default function SearchDetails() {
             }}>
               <FontAwesome name="imdb" size={60} />
             </TouchableOpacity>
+
+            {fromSreen === RouteNames.HeroDetails ? <Button
+              title="Mark as watched"
+              size='sm'
+              icon={<MaterialIcons name='done' size={22} color="white" style={{ marginRight: 10 }} />}
+              buttonStyle={{ backgroundColor: 'rgba(127, 220, 103, 1)' }}
+              style={{ marginLeft: 20 }}
+              color={DefaultTheme.colors.notification}
+              onPress={markAsWatched}
+            /> : null}
           </View>
         </View>
 

@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const instance = axios.create();
 instance.interceptors.request.use((config: AxiosRequestConfig) => {
@@ -16,4 +16,12 @@ export function ApiCall(config: AxiosRequestConfig): Promise<AxiosResponse<any>>
 
 export function randomNumberFromInterval(min: number, max: number): number {
   return Math.floor(Math.random() * (max - min + 1) + min)
+}
+
+export async function getSavedItem(key: string) {
+  return await AsyncStorage.getItem(key);
+}
+
+export async function setSavedItem(key: string, value: string) {
+  return await AsyncStorage.setItem(key, value);
 }

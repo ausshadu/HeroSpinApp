@@ -69,7 +69,11 @@ export default function HeroDetails(props: any) {
       } else {
         const movie = movieDetails.data as Movie;
         setIsLoading(false);
-        navigation.navigate(RouteNames.RandomMovieScreen, { title: movie.Title, movie });
+        navigation.navigate(RouteNames.RandomMovieScreen, {
+          title: movie.Title,
+          movie,
+          fromSreen: RouteNames.HeroDetails,
+        });
       }
     }
   };

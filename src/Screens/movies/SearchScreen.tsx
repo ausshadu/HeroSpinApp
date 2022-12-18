@@ -45,6 +45,7 @@ export default function SearchScreen() {
   const renderMovieCard = (movie: Search) => {
     return (
       <TouchableOpacity
+        key={movie.imdbID}
         style={{ flexDirection: 'row' }}
         onPress={() => {
           setIsLoading(true);

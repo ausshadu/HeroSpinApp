@@ -47,13 +47,15 @@ cd ios && pod install --repo-update
   
   3. [TAB] - **History**
         1. [SCREEN] - Watch History
+        2. [SCREEN] - Movie Detailed (History)
 
 ### Application screenshots
+
 |               | Screen 1 | Screen 2 | Screen 3 |
 |---------------|----------|----------|----------|
 | TAB - Hero    | <img src="./app_screens/1a.png" width="300">         | <img src="./app_screens/1b.png" width="300">         |<img src="./app_screens/1c.png" width="300">          |
-| TAB - Search  |<img src="./app_screens/2a.png" width="300">          | <img src="./app_screens/2b.png" width="300">          |    -      |
-| TAB - History |    Coming Soon      |          |          |
+| TAB - Search  | <img src="./app_screens/2a.png" width="300">          | <img src="./app_screens/2b.png" width="300">          |    -      |
+| TAB - History |    <img src="./app_screens/3a.png" width="300">      |          |          |
 
 ### Summary
 
@@ -63,4 +65,3 @@ cd ios && pod install --repo-update
     - [Application screens hierarchy](#application-screens-hierarchy)
     - [Application screenshots](#application-screenshots)
     - [Summary](#summary)
-
