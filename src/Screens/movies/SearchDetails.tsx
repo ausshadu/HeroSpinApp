@@ -4,6 +4,7 @@ import { useRoute } from '@react-navigation/native'
 import { Movie, Search } from '../../models/movies.models';
 import FastImage from 'react-native-fast-image';
 import moment from 'moment';
+import { DefaultTheme, useNavigation } from '@react-navigation/native';
 
 export default function SearchDetails() {
 
@@ -42,14 +43,14 @@ export default function SearchDetails() {
 
         <View style={{ flexDirection: 'row', marginTop: 10, }}>
           {titleDetails.Genre.split(', ').map(genre => (
-            <View style={{ height: 30, borderWidth: 1, alignItems: 'center', marginRight: 10, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 10, }}>
-              <Text>{genre}</Text>
+            <View style={{ height: 30, borderWidth: 1, alignItems: 'center', marginRight: 10, borderRadius: 15, paddingVertical: 5, paddingHorizontal: 10, backgroundColor: DefaultTheme.colors.notification, borderColor: DefaultTheme.colors.notification }}>
+              <Text style={{ color: 'white' }}>{genre}</Text>
             </View>
           ))}
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <View style={{ backgroundColor: 'black', padding: 10 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
             <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>SUMMARY</Text>
           </View>
           <View style={{ paddingHorizontal: 10 }}>
@@ -63,7 +64,7 @@ export default function SearchDetails() {
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <View style={{ backgroundColor: 'black', padding: 10 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
             <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>PLOT</Text>
           </View>
           <View style={{ paddingHorizontal: 10 }}>
@@ -72,7 +73,7 @@ export default function SearchDetails() {
         </View>
 
         <View style={{ marginTop: 20 }}>
-          <View style={{ backgroundColor: 'black', padding: 10 }}>
+          <View style={{ backgroundColor: DefaultTheme.colors.primary, padding: 10 }}>
             <Text style={{ fontSize: 16, color: 'white', fontWeight: 'bold' }}>RATINGS</Text>
           </View>
           <View style={{ paddingHorizontal: 10 }}>

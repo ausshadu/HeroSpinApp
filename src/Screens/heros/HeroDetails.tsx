@@ -78,10 +78,6 @@ export default function HeroDetails(props: any) {
 
   };
 
-  const markAsAlreadyWatched = () => {
-    navigation.navigate(RouteNames.HistoryScreen)
-  };
-
   return (
     <>
       <ScrollView>
@@ -181,18 +177,6 @@ export default function HeroDetails(props: any) {
                 style={{ width: dimensions.width / 2.5 }}
                 color={DefaultTheme.colors.text}
                 onPress={showAllMovies}
-              />
-
-
-            </View>
-            <View style={{ paddingHorizontal: 10, flexDirection: 'row', flex: 1, justifyContent: 'center', }}>
-              <Button
-                title="Already watched"
-                size="sm"
-                style={{ width: dimensions.width / 2 }}
-                color={DefaultTheme.colors.border}
-                titleStyle={{ color: DefaultTheme.colors.text }}
-                onPress={markAsAlreadyWatched}
               />
             </View>
           </View>
