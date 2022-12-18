@@ -1,13 +1,13 @@
 Bottom Tabs
   
-  TAB - Hero of the Day
+  TAB - Heros
       SCREEN  - Hero Search Page
       SCREEN  - Hero Detailed Page
   
-  TAB - Movie of the Day
+  TAB - Search
       SCREEN  - Movie Search Page
       SCREEN  - Movie Detailed Page
   
-  TAB - TV Series of the Day
+  TAB - History
       SCREEN  - TV Series Search Page
       SCREEN  - TV Series Detailed Page
